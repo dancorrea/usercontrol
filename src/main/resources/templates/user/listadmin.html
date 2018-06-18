@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+<head>
+<meta charset="UTF-8" />
+<title>Lista de usuários</title>
+</head>
+<body>
+
+	<nav layout:fragment="header" aria-label="breadcrumb" role="navigation">
+	  <ol class="breadcrumb">
+	     <li class="breadcrumb-item active" aria-current="page">Lista de Usuários</li>
+	  </ol>
+	</nav>
+	
+	<div layout:fragment="content" class="container">
+
+	<h3>Lista Admin: Acesso Liberado</h3><br/>
+	
+	<div>
+		<ul>
+			<li><a th:href="@{/user/list}" href="#"> Lista Basica </a></li>
+			<li><a th:href="@{/user/listadmin}" href="#"> Lista Admin </a></li>
+			<li><a th:href="@{/user/logout}" href="#"> Logout </a></li>
+		</ul>
+	</div><br/>
+
+		<table class="table table-bordered table-striped">
+			<tr>
+				<td scope="col">Username</td>
+				<td scope="col">Tipo user</td>
+				<td scope="col">Password</td>
+			</tr>
+			<tr th:each="user : ${users}">
+				<td th:text="${user.username}">Username</td>
+				<td th:text="${user.roles}">Role</td>
+				<td th:text="${user.password}">Password</td>
+			</tr>
+
+		</table>
+	<div>
+
+	</div>
+	</div>
+</body>
+</html>

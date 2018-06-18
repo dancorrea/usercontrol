@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	  layout:decorate="layout">
+<head>
+<meta charset="UTF-8" />
+<title>Detalhes do Livro</title>
+</head>
+<body>
+
+	<nav layout:fragment="header" aria-label="breadcrumb" role="navigation">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="#" th:href="@{/livros/list}">Livros</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">Detalhes do livro</li>
+	  </ol>
+	</nav>
+
+	<div layout:fragment="content" class="container" th:object="${livro}">
+	
+		<input type="hidden"  th:field="*{id}" />
+		
+		<div class="row">
+			<label>Título:</label>
+			<span th:text="*{titulo}">Título</span>
+		</div><br/>
+		
+		<div class="row">
+			<label>Quantidade:</label>
+			<span th:text="*{quantidade}">Quantidade</span>
+		</div><br/>
+		
+		<div class="row">
+			<label>Autor:</label>
+			<span  th:text="*{autor}">Autor</span>
+		</div><br/>
+		
+		<div class="row">
+		<label>Imagem:</label>
+		<img th:if="${livro.foto}" th:src="@{'/' + ${livro.foto}}" width="100px" />
+		</div>
+			
+	</div>
+	
+</body>
+</html>

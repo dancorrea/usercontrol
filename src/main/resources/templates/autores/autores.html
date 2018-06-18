@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+<meta charset="UTF-8" />
+<title>Lista de Autores</title>
+</head>
+<body>
+
+	<div layout:fragment="header" class="container">
+		<br /> <a th:href="@{/autores/novo}" class="btn btn-sm btn-info"><i class="glyphicon glyphicon-plus"></i> NOVO AUTOR</a>
+	</div>
+	
+	<div layout:fragment="content" class="container"><br/>
+	
+		<table class="table table-bordered table-striped">
+		
+		<thead>
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">Nome</th>
+				<th scope="col">Alterar</th>
+				<th scope="col">Excluir</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:if="${autores.empty}">
+				<td colspan="2">Sem autores</td>
+			</tr>
+
+			<tr th:each="autor : ${autores}">							
+				<td th:text="${autor.id}">1</td>
+				<td><a href="#" th:href="@{'/autores/exibir/'+${autor.id}}" th:text="${autor.nome}"> Nome </a></td>
+				<td><a href="#" th:href="@{'/autores/alterar/'+${autor.id}}" > <i class="glyphicon glyphicon-refresh"></i> </a></td>				
+				<td><a href="#" th:href="@{'/autores/excluir/'+${autor.id}}" > <i class="glyphicon glyphicon-trash"></i> </a></td>				
+			</tr>
+		</tbody>
+		
+	</table>
+	
+	</div>
+
+</body>
+</html>

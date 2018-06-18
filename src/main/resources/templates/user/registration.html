@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+<head>
+<meta charset="UTF-8" />
+<title>Registrar usuário</title>
+</head>
+<body>
+	
+	<nav layout:fragment="header" aria-label="breadcrumb" role="navigation">
+	  <ol class="breadcrumb">
+	     <li class="breadcrumb-item active" aria-current="page">Cadastrar novo usuário</li>
+	  </ol>
+	</nav>
+
+	<div layout:fragment="content" class="container">
+
+		<form id="userForm" th:action="@{/user/registration}" th:object="${userForm}" action="#" method="post">
+				
+			<label>Usuário:</label>
+			<input class="form-control" type="text" th:field="*{username}"/>
+			<span  th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Nome Error</span><br/>
+			
+			<label>Senha:</label>
+			<input class="form-control" type="text" th:field="*{password}"/>
+			<span  th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Nome Error</span><br/>
+			
+			<input type="submit" name="login" value="Enviar" />
+		</form>
+	
+	</div>
+
+</body>
+</html>

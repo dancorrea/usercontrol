@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="layout">
+<head>
+<meta charset="UTF-8" />
+<title>Lista de Livros</title>
+</head>
+<body>
+
+	<div layout:fragment="header" class="container">
+		<br /> <a th:href="@{/livros/novo}" class="btn btn-sm btn-info"><i class="glyphicon glyphicon-plus"></i> NOVO LIVRO</a>
+	</div>
+
+	<div layout:fragment="content" class="container"><br />
+	
+	<table class="table table-bordered table-striped">
+	
+		<thead>
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">Capa</th>
+				<th scope="col">Título</th>
+				<th scope="col">Quantidade</th>
+				<th scope="col">Alterar</th>
+				<th scope="col">Excluir</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:if="${livros.empty}"><td colspan="2">Sem livros</td></tr>
+			<tr th:each="livro : ${livros}">
+				<td th:text="${livro.id}">1</td>
+				<th scope="row"><img th:if="${livro.foto}" th:src="@{'/' + ${livro.foto}}" width="100px" /> 
+				<img th:unless="${livro.foto}" th:src="@{'../img/error.png'}" width="30px" /></th>
+				<td><a href="#" th:href="@{'/livros/exibir/'+${livro.id}}" th:text="${livro.titulo}"> Título </a></td>
+				<td><a href="#" th:href="@{'/livros/exibir/'+${livro.id}}" th:text="${livro.quantidade}"> Quantidade </a></td>
+				<td><a href="#" th:href="@{'/livros/alterar/'+${livro.id}}"> <i class="glyphicon glyphicon-refresh"></i> </a></td>
+				<td><a href="#" th:href="@{'/livros/excluir/'+${livro.id}}"> <i class="glyphicon glyphicon-trash"></i> </a></td>
+			</tr>
+		</tbody>
+		
+	</table>
+	
+	</div>
+</body>
+</html>

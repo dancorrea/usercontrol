@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="layout">
+<head>
+<meta charset="UTF-8" />
+<title>Lista de Empréstimos</title>
+</head>
+<body>
+
+	<div layout:fragment="header" class="container">
+		<br /> <a th:href="@{/emprestimos/novo}" class="btn btn-sm btn-info"><i class="glyphicon glyphicon-plus"></i> NOVO EMPRÉSTIMO</a>
+	</div>
+
+	<div layout:fragment="content" class="container"><br />
+	
+	<table class="table table-bordered table-striped">
+	
+		<thead>
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">Livro</th>
+				<th scope="col">Usuário</th>
+				<th scope="col">Data Empréstimo</th>
+				<th scope="col">Data Devolução</th>				
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:if="${emprestimos.empty}"><td colspan="2">Sem empréstimo</td></tr>
+			
+			<tr th:each="emprestimo : ${emprestimos}">
+				<td th:text="${emprestimo.id}">1</td>
+				<td><a href="#" th:href="@{'/emprestimos/exibir/'+${emprestimo.id}}" th:text="${emprestimo.livro}"> Livro </a></td>
+				<td><a href="#" th:href="@{'/emprestimos/exibir/'+${emprestimo.id}}" th:text="${emprestimo.user}"> Usuário </a></td>
+				<td><a href="#" th:href="@{'/emprestimos/exibir/'+${emprestimo.id}}" th:text="${emprestimo.dataEmprestimo}"> Empréstimo </a></td>
+				<td><a href="#" th:href="@{'/emprestimos/exibir/'+${emprestimo.id}}" th:text="${emprestimo.dataDevolucao}"> Devolução </a></td>
+			</tr>
+		</tbody>
+		
+	</table>
+	
+	</div>
+</body>
+</html>

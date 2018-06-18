@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	  layout:decorate="layout">
+<head>
+<meta charset="UTF-8" />
+<title>Cadastro de Empréstimo</title>
+</head>
+
+	<body>
+	
+		<nav layout:fragment="header" aria-label="breadcrumb" role="navigation">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="#" th:href="@{/emprestimos/list}">Empréstimos</a></li>
+		    <li class="breadcrumb-item active" aria-current="page">Cadastrar novo empréstimo</li>
+		  </ol>
+		</nav>
+		
+		<div layout:fragment="content" class="container">
+		
+		<form id="emprestimoForm" th:action="@{/emprestimos/gravar}" method="post" th:object="${emprestimo}" action="#" enctype="multipart/form-data" >
+			
+			<input type="hidden"  th:field="*{id}" />
+			  	
+			
+			<label>Livro:</label>
+			<select class="form-control" th:field="*{livro}">
+				<option th:each="livro : ${livros}" th:value="${livro.id}" th:text="${livro.titulo}">Livro</option>
+			</select><br/>
+			 
+			<label>Usuário:</label>
+			<select class="form-control" th:field="*{user}">
+				<option th:each="user : ${users}" th:value="${user.username}" th:text="${user.username}">Usuário</option>
+			</select><br/>
+					
+			<label>Data Empréstimo:</label>
+		 	<input class="form-control" type="date" th:field="*{dataEmprestimo}" />
+			<span  th:if="${#fields.hasErrors('dataEmprestimo')}" th:errors="*{dataEmprestimo}">Data Error</span><br/>
+			
+			<label>Data Devolução:</label>
+		 	<input class="form-control" type="date" th:field="*{dataDevolucao}" />
+			<span  th:if="${#fields.hasErrors('dataDevolucao')}" th:errors="*{dataDevolucao}">Data Error</span><br/>
+							
+			<input class="btn btn-primary" type="submit" value="Salvar" />
+		</form>
+		
+		</div>
+		
+	</body>
+
+</html>
